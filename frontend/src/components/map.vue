@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
-// import { Harp } from "@/services/myharp";
-// import * as THREE from "@/services/three.js"
-// import * as harp from "@/services/harp.js"
+declare const harp: any;
 
 const canvasRef = ref();
 

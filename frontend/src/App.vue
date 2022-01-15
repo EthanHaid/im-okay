@@ -15,7 +15,7 @@
 @import 'primevue/resources/themes/bootstrap4-light-blue/theme.css';
 @import './colors.css';
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Cabin:wght@600&family=Raleway:wght@300;400;600&display=swap");
 
 html {
   font-family: 'Nunito', sans-serif; /* TODO: Pick a better one (+ remove url import) */

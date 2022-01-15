@@ -12,12 +12,25 @@ import Map from '@/components/map.vue'
 </template>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Cabin:wght@600&family=Raleway:wght@300;400;600&display=swap");
+:root {
+  --primary: #ff6458;
+  --primary-light: #ffd1ba;
+  --secondary: #355497;
+  --secondary-light: #6987c9;
+  --light: #fdf6ed;
+  --dark: #1a150f;
+  --display-font: "Cabin", sans-serif;
+  --text-font: "Raleway", sans-serif;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: var(--text-font);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  background-color: #ffffff;
+  color: var(--dark);
   margin-top: 60px;
 }
 </style>

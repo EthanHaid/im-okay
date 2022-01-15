@@ -1,0 +1,6 @@
+# Testing
+pytest
+requests
+
+# Linting
+black

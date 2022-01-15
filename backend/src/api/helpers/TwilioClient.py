@@ -7,12 +7,12 @@ class TwilioClient:
         self.client = Client(account_sid, auth_token)
         self.twilio_phone_number = twilio_phone_number
 
-    def send_bulk_disaster_messages(self, phone_numbers: List[str], disaster):
+    def send_bulk_disaster_messages(self, phone_numbers: List[str], disaster_id: str):
         messages = []
         for phone_number in phone_numbers:
-            messages.append(self.send_disaster_message(phone_number, disaster))
+            messages.append(self.send_disaster_message(phone_number, disaster_id))
 
-    def send_disaster_message(self, phone_number: str, disaster):
+    def send_disaster_message(self, phone_number: str, disaster_id: str):
         message_body = "Hey my broski, you good? Reply YES or NO."
         return self.send_message(phone_number, message_body)
 

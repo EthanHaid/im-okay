@@ -1,6 +1,5 @@
 from twilio.rest import Client
 from typing import List
-from ..config import *
 
 
 class TwilioClient:
@@ -33,6 +32,3 @@ class TwilioClient:
             limit=20
         )
         return len(messages) > 0
-
-
-client = TwilioClient(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN, config.TWILIO_PHONE_NUMBER)

@@ -2,7 +2,9 @@ from os import environ
 
 
 class _BaseConfig:
-    YOUR_SHIT: str = "HEER"
+    TWILIO_ACCOUNT_SID: str = "ACfa91146369a012b0e912cd3719cb04d8"
+    TWILIO_AUTH_TOKEN: str = None
+    TWILIO_PHONE_NUMBER: str = "+19377644868"
 
     def __init__(self):
         self._load_environment_variables()

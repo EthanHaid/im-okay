@@ -1,5 +1,6 @@
 from twilio.rest import Client
 from typing import List
+from ..config import *
 
 
 class TwilioClient:
@@ -30,9 +31,4 @@ class TwilioClient:
         return len(messages) > 0
 
 
-account_sid = "ACfa91146369a012b0e912cd3719cb04d8"
-# Your Auth Token from twilio.com/console
-auth_token = "bbf8c32367b2783e998dc080fe5926f7"
-client = TwilioClient(account_sid, auth_token, "+19377644868")
-client.send_disaster_message('7782513682', "test")
-print(client.has_number_been_messaged('+17782513682'))
+client = TwilioClient(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN, config.TWILIO_PHONE_NUMBER)

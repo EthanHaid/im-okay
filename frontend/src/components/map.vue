@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
+import { db } from "@/firebase";
+
 declare const harp: any;
 
 const canvasRef = ref();
@@ -9,13 +11,6 @@ onMounted(() => {
   const mapView = new harp.MapView({
     canvas,
     theme: "https://unpkg.com/@here/harp-map-theme@latest/resources/berlin_tilezen_night_reduced.json"
-  });
-
-  // TODO: base coords on backend data
-  mapView.lookAt({
-    target: new harp.GeoCoordinates(40.70398928, -74.01319808),
-    zoomLevel: 17,
-    tilt: 40,
   });
 
   const mapControls = new harp.MapControls(mapView);
@@ -29,6 +24,15 @@ onMounted(() => {
     authenticationCode: "61cG0CqLLHlSzg5-OFXCt22CbT3jR6GU4f4kl-JS-1A"
   });
   mapView.addDataSource(vectorTileDataSource);
+
+  db.ref('test').get().then(d => {
+    let { lat, lon } = d.val();
+    mapView.lookAt({
+      target: new harp.GeoCoordinates(lat, lon),
+      zoomLevel: 4,
+      tilt: 40,
+    });
+  })
 })
 
 </script>

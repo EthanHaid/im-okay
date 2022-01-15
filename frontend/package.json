@@ -14,7 +14,8 @@
     "primeicons": "^5.0.0",
     "primevue": "^3.10.0",
     "vue": "^3.2.25",
-    "vue-router": "^4.0.12"
+    "vue-router": "^4.0.12",
+    "firebase": "^9.6.3"
   },
   "devDependencies": {
     "@types/three": "^0.136.1",

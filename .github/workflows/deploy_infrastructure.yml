@@ -1,0 +1,36 @@
+name: Deploy Infrastructure to AWS
+
+on:
+  push:
+    branches: [ master ]
+
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Node 14
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - name: Install dependencies
+      working-directory: ./aws
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Check for Changes
+      working-directory: ./aws
+      run: |
+        npx cdk synth
+    - name: Deploy
+      working-directory: ./aws
+      run: |
+        npx cdk deploy

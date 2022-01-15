@@ -1,4 +1,4 @@
 uvicorn
 fastapi
 mangum
-twilo
+twilio

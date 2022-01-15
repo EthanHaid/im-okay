@@ -2,7 +2,7 @@ name: Deploy Infrastructure to AWS
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}

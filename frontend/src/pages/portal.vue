@@ -1,29 +1,39 @@
 <script setup lang="ts">
-import Title from "@/components/title.vue";
+import Sidebar from "@/components/sidebar.vue";
 import Button from "primevue/button";
 </script>
 
 <template>
-  <div class="p-grid">
-  	<div class="p-col-3 sidebar">
-      <Title />
-      <a><i class="pi pi-home"></i>&nbsp&nbspHome</a><br/><br/>
-      <a><i class="pi pi-envelope"></i>&nbsp&nbspInbox</a><br/><br/>
-      <a><i class="pi pi-clock"></i>&nbsp&nbspHistory</a><br/><br/><br/><br/>
-      <Button class="btn" label="Create Message"/>
-    </div>
-  	<div className="p-col-9">
+  <div>
+  	<Sidebar />
+  	<div>
+      <div class="p-grid">
+        <div class="p-row">
+          <div id="map" class="p-col">
+            <h2>Map View</h2>
+          </div>
+          <div class="p-col">
+            <div id="summary" class="p-row">
+              <h2>Data Summary</h2>
+            </div>
+            <div id="responses" class="p-row">
+              <h2>Responses</h2>
+            </div>
+          </div>
+        </div>
+        <div id="other" class="p-row">
+          <h2>Other Messages Sent</h2>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-  .sidebar {
-    height: 100vh;
-    width: 20vw;
-    background-color: var(--secondary);
-    padding: 1em;
-    color: var(--cream);
-    font-family: var(--text-font)
+  #map {
+    height: 70vh;
+    width: 50vw;
+    background-color: var(--cream);
+    float: left;
   }
 </style>

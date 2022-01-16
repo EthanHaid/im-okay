@@ -19,14 +19,13 @@ const options = {
 <template>
   <v-vanta effect="globe" :options=options></v-vanta>
   <div class="p-grid" id="container">
-  	<div class="p-col-3 sidebar">
+  	<div class="p-col-6 sidebar">
       <Title />
     </div>
-  	<div class="p-col-9">
-      <Button class="btn" label="Create Message"/>
-      <Button @click="$router.push('map')" label="View Map" />
+  	<div class="p-col-6">
+      <Button class="btn" @click="$router.push('map')" label="View Map" />
       <br />
-      <Button @click="$router.push('send')" label="Send safety check" />
+      <Button class="btn" @click="$router.push('send')" label="Send safety check" />
     </div>
   </div>
 </template>

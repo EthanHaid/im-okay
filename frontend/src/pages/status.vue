@@ -28,7 +28,7 @@ function thanks() {
     <p>where there is currently a <strong>hurricane warning</strong></p>
     <h3>Are you okay?</h3>
     <span class="p-float-label">
-    	<InputText id="comment" type="text" v-model="value" placeholder="Optional message"/>
+    	<InputText id="comment" type="text" placeholder="Optional message"/>
     	<label for="comment"></label>
     </span><br/>
     <Button class="btn" label="SEND HELP" @click="help()"/><br/>

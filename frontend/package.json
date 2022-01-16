@@ -10,12 +10,13 @@
     "@here/harp-map-controls": "^0.27.1",
     "@here/harp-mapview": "^0.27.1",
     "@here/harp-vectortile-datasource": "^0.27.1",
+    "firebase": "^9.6.3",
     "primeflex": "^3.1.2",
     "primeicons": "^5.0.0",
     "primevue": "^3.10.0",
     "vue": "^3.2.25",
     "vue-router": "^4.0.12",
-    "firebase": "^9.6.3"
+    "vue-vanta": "0.0.1"
   },
   "devDependencies": {
     "@types/three": "^0.136.1",

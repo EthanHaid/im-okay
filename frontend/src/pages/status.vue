@@ -9,22 +9,25 @@ import InputText from 'primevue/inputtext';
 import Sidebar from "primevue/sidebar";
 import { useRoute, onBeforeRouteUpdate } from "vue-router";
 import { DisasterAPI } from "@/api/disaster";
+import {useRouter} from "vue-router";
 
-
+const router = useRouter();
 const route = useRoute()
 var value = ""
+let messageString = ref('');
 let location = ref({})
 let disasterApi = new DisasterAPI(route.query.disaster_id, route.query.disaster_response_id)
 setLocation()
 
 async function help() {
-  await disasterApi.respondHelp()
-  alert("Help is on the way!")
+  await disasterApi.respondHelp(messageString.value);
+  alert("Help is on the way!");
 }
 
 async function thanks() {
-  await disasterApi.respondOk()
-  alert("Thanks for confirming!")
+  await disasterApi.respondOk(messageString.value)
+  alert("Thanks for confirming!");
+  await router.push('/map');
 }
 
 function setLocation() {
@@ -47,7 +50,7 @@ function setLocation() {
     </div>
     <p>where there is currently a <strong>hurricane warning</strong></p>
     <h3>Are you okay?</h3>
-    <InputText id="comment" type="text" placeholder="Optional message"/><br/><br/>
+    <InputText id="comment" type="text" placeholder="Optional message" v-model="messageString"/><br/><br/>
     <Button class="btn" label="SEND HELP" @click="help()"/><br/>
     <Button class="ok-btn" label="I'm Okay" @click="thanks()"/>
   </div>
@@ -73,12 +76,14 @@ function setLocation() {
 }
 
 header {
-    background-color: var(--secondary);
-    width: 100vw;
+  background-color: var(--secondary);
+  position: fixed;
+  top: 0;
+  width: 100vw;
 }
 header > h1 {
   color: var(--cream);
-  margin: 0em 0.5em;
+  margin: 0.2em 0.5em;
 }
 .ok-btn {
   color: var(--primary);

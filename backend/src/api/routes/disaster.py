@@ -20,6 +20,7 @@ def get_disasters() -> List[DisasterFireBase]:
     for disaster in disasters:
         # Parse responses because its wack. Same format as the comment below
         if 'responses' in disaster.item[1].keys():
+            print(disaster.item[0])
             responses = disaster.item[1]['responses']
             responses = [DisasterResponseFireBase(id=key, **responses[key]) for key in responses.keys()]
             disaster.item[1]['responses'] = responses

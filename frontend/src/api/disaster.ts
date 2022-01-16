@@ -22,18 +22,18 @@ class DisasterAPI {
         this.lon = pos.coords.longitude
     }
 
-    async respondOk() {
-        return this._respondToDisaster("True")
+    async respondOk(message: string) {
+        return this._respondToDisaster("True", message)
     }
 
-    async respondHelp() {
-        return this._respondToDisaster("False")
+    async respondHelp(message: string) {
+        return this._respondToDisaster("False", message)
     }
 
-    async _respondToDisaster(isOk: string) {
+    async _respondToDisaster(isOk: string, message: string) {
         return await axios.put(`/disasters/response/${this.disasterId}/${this.disaster_response_id}`, {
             "is_ok": isOk,
-            "message": "stub",
+            "message": message,
             "location": {
                 lat: this.lat,
                 lon: this.lon

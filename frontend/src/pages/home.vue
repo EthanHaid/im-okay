@@ -5,25 +5,34 @@ import Button from "primevue/button";
 import VVanta from 'vue-vanta';
 
 const options = {
-            mouseControls: true,
-            touchControls: true,
-            minHeight: 1000.00,
-            minWidth: 200.00,
-            scale: 1.00,
-            scaleMobile: 1.00,
-            color: 0x144470,
-            waveSpeed: 1.20,
-        }
+  mouseControls: true,
+  touchControls: true,
+  minHeight: 1000.00,
+  minWidth: 200.00,
+  scale: 1.00,
+  scaleMobile: 1.00,
+  color: 0x144470,
+  waveSpeed: 1.20,
+}
 </script>
 
 <template>
   <div class="absolute">
-    <Title/>
-    <p>A visual application for getting people the help they need.</p>
-    <Button class="btn" @click="$router.push('map')" label="View Map" />&nbsp
-    <Button class="btn" @click="$router.push('send')" label="Send safety check" />
+    <Title />
+    <div class="row">
+      <Button class="btn" @click="$router.push('status')" label="Check In" />
+      <p>with emergency services</p>
+    </div>
+    <div class="row">
+      <Button class="btn" @click="$router.push('request')" label="Request the Status" />
+      <p>of someone in trouble</p>
+    </div>
+    <div class="row">
+      <Button class="btn" @click="$router.push('map')" label="View the Map" />
+      <p>of issues worldwide</p>
+    </div>
   </div>
-  <v-vanta id="bg" effect="waves" :options=options></v-vanta>
+  <v-vanta id="bg" effect="waves" :options="options" />
 </template>
 
 <style scoped>
@@ -36,9 +45,17 @@ const options = {
     background-color: var(--secondary);
     padding: 1em;
 }
-.absolute > p {
+
+.row {
+  display: flex;
+  flex-direction: row;
+  margin: 0.5rem;
+}
+
+p {
   font-size: 0.7em;
   color: var(--primary-light);
+  margin: 0.5rem;
 }
 
 #bg {

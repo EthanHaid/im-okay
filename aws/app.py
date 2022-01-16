@@ -30,8 +30,13 @@ class FastApiService(Construct):
             handler=handler,
             rest_api_name="Disaster Recovery",
             description="A Simple Disaster Recovery API",
-            proxy=True
+            proxy=True,
+            default_cors_preflight_options=aws_apigateway.CorsOptions(
+                allow_origins=aws_apigateway.Cors.ALL_ORIGINS,
+                allow_methods=aws_apigateway.Cors.ALL_METHODS
+            )
         )
+
 
 
 class BackendStack(Stack):

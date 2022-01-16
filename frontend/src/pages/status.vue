@@ -76,12 +76,14 @@ function setLocation() {
 }
 
 header {
-    background-color: var(--secondary);
-    width: 100vw;
+  background-color: var(--secondary);
+  position: fixed;
+  top: 0;
+  width: 100vw;
 }
 header > h1 {
   color: var(--cream);
-  margin: 0em 0.5em;
+  margin: 0.2em 0.5em;
 }
 .ok-btn {
   color: var(--primary);

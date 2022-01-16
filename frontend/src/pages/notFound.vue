@@ -3,8 +3,8 @@ import Button from "primevue/button";
 </script>
 
 <template>
-  <div class="page-container">
-    <div class="title">This isn't the page you're looking for.</div>
+  <div className="page-container">
+    <div className="title">This isn't the page you're looking for.</div>
     <Button @click="$router.push('/')" label="Go Home" />
   </div>
 </template>

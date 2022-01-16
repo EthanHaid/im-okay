@@ -20,7 +20,7 @@ const visibleRight = ref(false);
     <Button
       id="filter-button"
       icon="pi pi-filter-fill"
-      class="p-button-rounded"
+      className="p-button-rounded"
       @click="visibleRight= true" />
 
 </template>

@@ -34,7 +34,7 @@ onMounted(() => {
             technique: 'circles',
             renderOrder: 10000,
             color: '#ff6458',
-            size: 20,
+            size: 10,
           }
         ]
       }
@@ -56,13 +56,15 @@ onMounted(() => {
   mapView.addDataSource(vectorTileDataSource);
   mapView.canvas.addEventListener('click', (e: any) => {
       const intersectResult = mapView.intersectMapObjects(e.offsetX, e.offsetY);
-      if (intersectResult.length) {
+      const staticPoint: any = intersectResult.find((x: { dataSourceName: string; }) => x.dataSourceName === 'static');
+
+      if (staticPoint != null) {
+        console.log(staticPoint)
         // @ts-ignore
-        clickedPoint = features.features[intersectResult[0].dataSourceOrder]
+        clickedPoint = features.features[staticPoint.dataSourceOrder]
         pointData.value.selected = true;
         pointData.value.coordinates = clickedPoint.geometry.coordinates;
         pointData.value.properties = clickedPoint.properties;
-        console.log(pointData.value);
       }
   });
 

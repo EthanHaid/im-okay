@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 from constructs import Construct
@@ -20,6 +21,9 @@ class FastApiService(Construct):
             runtime=aws_lambda.Runtime.PYTHON_3_9,
             index='lambda.py',
             handler="handler",
+            environment={
+                'TWILIO_AUTH_TOKEN': os.environ.get('TWILIO_AUTH_TOKEN', 'SET ME!')
+            }
         )
 
         aws_apigateway.LambdaRestApi(

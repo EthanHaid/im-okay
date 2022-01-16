@@ -2,3 +2,4 @@ uvicorn
 fastapi
 mangum
 twilio
+python-multipart

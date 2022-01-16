@@ -1,44 +1,69 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import Map from "@/components/map.vue"
+import Title from "@/components/title.vue"
 
 import Button from "primevue/button";
 import Checkbox from 'primevue/checkbox';
+import InputText from 'primevue/inputtext';
 import Sidebar from "primevue/sidebar";
 
-
-const visibleRight = ref(false);
+function help() {
+  alert("Help is on the way!")
+}
+function thanks() {
+  alert("Thanks for confirming!")
+}
 </script>
 
 <template>
+    <header>
+      <Title />
+    </header>
   <div>
-    <Button label="Help" />
-    <Button label="I'm Ok" />
+    <p>We detected that you are near:</p>
+    <div class="for-adam">
+      <h3>3345 Pearl St. New York, NY, United States</h3>
+    </div>
+    <p>where there is currently a <strong>hurricane warning</strong></p>
+    <h3>Are you okay?</h3>
+    <span class="p-float-label">
+    	<InputText id="comment" type="text" v-model="value" placeholder="Optional message"/>
+    	<label for="comment"></label>
+    </span><br/>
+    <Button class="btn" label="SEND HELP" @click="help()"/><br/>
+    <Button class="ok-btn" label="I'm Okay" @click="thanks()"/>
   </div>
 </template>
 
 <style scoped>
-div {
+.for-adam {
   background-image: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);
-  height: 100vh;
+}
+
+div {
+  text-align: center;
+  padding: 2em;
 }
 
 header {
-    background-color: rgba(53, 84, 151, 0.75);
-    position: fixed;
-    top: 0;
+    background-color: var(--secondary);
     width: 100vw;
 }
 header > h1 {
   color: var(--cream);
-  margin: 0.2em 0.5em;
+  margin: 0em 0.5em;
 }
-
-#filter-button {
-  position: fixed;
-  bottom: 2em;
-  right: 2em;
-  background-color: var(--primary);
+.ok-btn {
+  color: var(--primary);
+  background-color: rgba(0,0,0,0);
   border: none;
 }
+.ok-btn:hover {
+  color: var(primary);
+  background-color: rgba(0,0,0,0) !important
+}
+
+
+
 </style>

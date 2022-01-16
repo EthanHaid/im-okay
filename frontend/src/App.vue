@@ -26,11 +26,24 @@ html {
 html, body, #app, #view {
   height: 100%;
   margin: 0;
+  color: var(--text-color);
 }
 
 h1 {
   font-family: var(--display-font);
-  color: var(--text-color);
+}
+
+p {
+  font-family: var(--text-font);
+
+}
+
+.btn {
+  background-color: var(--primary) !important;
+  border: none !important;
+}
+.btn:hover {
+  background-color: var(--primary-light) !important;
 }
 
 .highlight {

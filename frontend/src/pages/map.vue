@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import Map from "@/components/map.vue"
+import Map from "@/components/map.vue";
+import Title from "@/components/title.vue";
 
 import Button from "primevue/button";
 import Checkbox from 'primevue/checkbox';
@@ -11,10 +12,7 @@ const visibleRight = ref(false);
 
   <template>
     <header>
-      <h1 @click="$router.push('/')">
-        I<span class="highlight">'</span>m
-        Okay<span class="highlight">.</span>
-      </h1>
+      <Title />
     </header>
     <Map />
 
@@ -25,7 +23,7 @@ const visibleRight = ref(false);
     <Button
       id="filter-button"
       icon="pi pi-filter-fill"
-      class="p-button-rounded"
+      class="p-button-rounded btn"
       @click="visibleRight= true" />
 
 </template>
@@ -46,7 +44,5 @@ header > h1 {
   position: fixed;
   bottom: 2em;
   right: 2em;
-  background-color: var(--primary);
-  border: none;
 }
 </style>

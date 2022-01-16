@@ -7,7 +7,9 @@ import Dropdown from 'primevue/dropdown';
 import Title from "@/components/title.vue";
 import {axios} from "@/services/axios";
 import {DisasterAPI} from "@/api/disaster";
+import {useRouter} from "vue-router";
 
+const router = useRouter()
 const numbers = ref<String[]>([])
 const disasters = ref<String[]>([])
 const number = ref("")
@@ -31,6 +33,10 @@ const keyDownEvent = (event: KeyboardEvent) => {
     number.value = "";
   }
 };
+
+async function newDisaster() {
+  await router.push('/create')
+}
 
 async function submitNumbers(disasterId: string) {
   if(!selectedDisaster.value || !selectedDisaster.value.id) { return; }
@@ -64,6 +70,9 @@ function uploadCSV(event: any) {
 
 
     <div v-if="!sent" class="list-container">
+      <div>
+        <Button class="new-disaster" @click="newDisaster" label="Input a new Disaster" />
+      </div>
       <div class="list-item" v-for="number in numbers">
         {{number}}
       </div>
@@ -112,6 +121,10 @@ header > h1 {
 
 .list-item {
   padding: 0.5rem;
+}
+
+.new-disaster {
+  margin-bottom: 1rem;
 }
 
 /* Chrome, Safari, Edge, Opera */

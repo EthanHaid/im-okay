@@ -28,6 +28,15 @@ html, body, #app, #view {
   margin: 0;
 }
 
+h1 {
+  font-family: var(--display-font);
+  color: var(--text-color);
+}
+
+.highlight {
+  color: var(--primary);
+}
+
 #view {
   background-color: var(--light);
   display: flex;

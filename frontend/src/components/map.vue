@@ -96,11 +96,11 @@ onMounted(() => {
     </div>
 
     <div class="li">
-      Is Ok:
+      Status:
       <span v-if="pointData.properties.isOk">
-        {{ pointData.properties.isOk }}
+        I'm Ok.
       </span>
-      <span v-else>Not Ok</span>
+      <span v-else>I need help</span>
     </div>
 
     <div class="li" v-if="pointData.properties.timestamp">

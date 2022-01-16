@@ -1,7 +1,7 @@
 # I'm Okay
 Enabling emergency services and location tracking for loved ones in disaster scenarios
 
-# Live Deployment
+## Live Deployment
 www.imokay.tech
 
 ## Dev Setup

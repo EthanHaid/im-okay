@@ -28,10 +28,10 @@ class TwilioClient:
             is_ok=IsOkResponse.NO_RESPONSE,
             phone_number=phone_number,
         )
-        handle_create_disaster_response(disaster_id, disaster_response_input)
+        disaster_response_id = handle_create_disaster_response(disaster_id, disaster_response_input)['name']
 
         # Send text message
-        message_body = f"{DISASTER_MSG}\n{config.FRONTEND_URL}?d={disaster_id}&p={phone_number}"
+        message_body = f"{DISASTER_MSG}\n{config.FRONTEND_URL}?disaster_id={disaster_id}&disaster_response_id={disaster_response_id} "
         return self.send_message(phone_number, message_body)
 
     def send_message(self, phone_number: str, message_body: str):

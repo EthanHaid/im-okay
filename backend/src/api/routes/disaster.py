@@ -11,15 +11,32 @@ router = APIRouter(prefix='/' + PREFIX)
 
 
 @router.get("/")
-def get_disasters() -> List[DisasterResponseFireBase]:
+def get_disasters() -> List[DisasterFireBase]:
     firebase_client = FirebaseClient()
     db = firebase_client.get_db()
-    data = db.child(PREFIX).get()
-    return list(data)
+    disasters = db.child(PREFIX).get().each()
+
+    result = []
+    for disaster in disasters:
+        # Parse responses because its wack. Same format as the comment below
+        if 'responses' in disaster.item[1].keys():
+            responses = disaster.item[1]['responses']
+            responses = [DisasterResponseFireBase(id=key, **responses[key]) for key in responses.keys()]
+            disaster.item[1]['responses'] = responses
+
+        # Iterate through each item in the list and format properly
+        # Pyrebase returns in a wack { item : [id, object_values] } format so deal with that crap
+        result.append(DisasterFireBase(
+            id=disaster.item[0],
+            **disaster.item[1],
+        ))
+        print(disaster.item[0])
+
+    return result
 
 
 @router.get("/{disaster_id}")
-def get_disaster(disaster_id: str) -> DisasterResponseFireBase:
+def get_disaster(disaster_id: str) -> DisasterFireBase:
     firebase_client = FirebaseClient()
     db = firebase_client.get_db()
     disaster = db.child(PREFIX).child(disaster_id).get()
@@ -28,7 +45,7 @@ def get_disaster(disaster_id: str) -> DisasterResponseFireBase:
 
 @router.post("/")
 def create_disaster(disaster_input: DisasterInput) -> DisasterFireBase:
-    disaster = DisasterCreate(**disaster_input.dict(), timestamp=datetime.datetime.now())
+    disaster = DisasterCreate(**disaster_input.dict(), timestamp=datetime.datetime.now().__str__())
 
     firebase_client = FirebaseClient()
     db = firebase_client.get_db()
@@ -37,7 +54,8 @@ def create_disaster(disaster_input: DisasterInput) -> DisasterFireBase:
 
 
 @router.put("/response/{disaster_id}/{disaster_response_id}")
-def update_disaster_response(disaster_id: str, disaster_response_id: str, disaster_response_input: DisasterResponseInput) -> DisasterFireBase:
+def update_disaster_response(disaster_id: str, disaster_response_id: str,
+                             disaster_response_input: DisasterResponseInput) -> DisasterFireBase:
     firebase_client = FirebaseClient()
     db = firebase_client.get_db()
     disaster_response_record = db.child(PREFIX).child(disaster_id).child('responses').child(disaster_response_id)
@@ -59,7 +77,8 @@ def create_disaster_response(disaster_id: str, disaster_response_input: Disaster
 
 def handle_create_disaster_response(disaster_id: str, disaster_response_input: DisasterResponseInput):
     # Add timestamp
-    disaster_response = DisasterResponseCreate(**disaster_response_input.dict(), timestamp=datetime.datetime.now().__str__())
+    disaster_response = DisasterResponseCreate(**disaster_response_input.dict(),
+                                               timestamp=datetime.datetime.now().__str__())
 
     firebase_client = FirebaseClient()
     db = firebase_client.get_db()

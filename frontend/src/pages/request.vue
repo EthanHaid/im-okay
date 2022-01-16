@@ -4,6 +4,7 @@ import Button from "primevue/button";
 import InputText from "primevue/inputtext";
 
 import Title from "@/components/title.vue";
+import {axios} from "@/services/axios";
 
 const numbers = ref<String[]>([])
 const number = ref("")
@@ -17,10 +18,9 @@ const keyDownEvent = (event: KeyboardEvent) => {
   }
 };
 
-function submitNumbers() {
+async function submitNumbers(disasterId: string) {
   sent.value = true;
-  // TODO submit to backend
-  numbers.value = [];
+  await axios.post(`/message/send/list?disaster_id=${disasterId}`, numbers.value)
 }
 
 function uploadCSV(event: any) {
@@ -58,7 +58,7 @@ function uploadCSV(event: any) {
       &nbsp;
       <Button @click="sent = false" label="Send another"></Button>
     </div>
-    <Button v-if="numbers.length > 0" class="submit-button" @click="submitNumbers" label="Send Safety Message" />
+    <Button v-if="numbers.length > 0" class="submit-button" @click="submitNumbers('-MtW3zaUorRXshWPTJN3')" label="Send Safety Message" />
   </div>
 </template>
 

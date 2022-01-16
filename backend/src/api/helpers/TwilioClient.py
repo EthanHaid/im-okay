@@ -21,6 +21,7 @@ class TwilioClient:
         messages = []
         for phone_number in phone_numbers:
             messages.append(self.send_disaster_message(phone_number, disaster_id))
+        return messages
 
     def send_disaster_message(self, phone_number: str, disaster_id: str):
         # Create an unanswered Disaster Response Input
@@ -31,7 +32,7 @@ class TwilioClient:
         disaster_response_id = handle_create_disaster_response(disaster_id, disaster_response_input)['name']
 
         # Send text message
-        message_body = f"{DISASTER_MSG}\n{config.FRONTEND_URL}?disaster_id={disaster_id}&disaster_response_id={disaster_response_id} "
+        message_body = f"{DISASTER_MSG}\n{config.FRONTEND_URL}/status?disaster_id={disaster_id}&disaster_response_id={disaster_response_id} "
         return self.send_message(phone_number, message_body)
 
     def send_message(self, phone_number: str, message_body: str):

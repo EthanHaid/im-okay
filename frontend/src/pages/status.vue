@@ -12,8 +12,9 @@ import { DisasterAPI } from "@/api/disaster";
 
 
 const route = useRoute()
+var value = ""
 let location = {}
-let disasterApi = new DisasterAPI(String(route.query.d), String(route.query.p))
+let disasterApi = new DisasterAPI(String(route.query.disaster_id), String(route.query.disaster_response_id))
 setLocation()
 
 async function help() {
@@ -45,10 +46,7 @@ function setLocation() {
     </div>
     <p>where there is currently a <strong>hurricane warning</strong></p>
     <h3>Are you okay?</h3>
-    <span class="p-float-label">
-    	<InputText id="comment" type="text" v-model="value" placeholder="Optional message"/>
-    	<label for="comment"></label>
-    </span><br/>
+    <InputText id="comment" type="text" placeholder="Optional message"/><br/><br/>
     <Button class="btn" label="SEND HELP" @click="help()"/><br/>
     <Button class="ok-btn" label="I'm Okay" @click="thanks()"/>
   </div>

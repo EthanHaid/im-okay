@@ -1,25 +1,29 @@
 <script setup lang="ts">
+import Title from "@/components/title.vue";
 import Button from "primevue/button";
 </script>
 
 <template>
-  <div className="p-grid">
-  	<div className="p-col-3 sidebar">
-      <h1>Disaster+Recovery</h1>
-      <a>Home</a>
-      <a>Inbox</a>
-      <a>History</a>
-      <button>Create Message</button>
+  <div class="p-grid">
+  	<div class="p-col-3 sidebar">
+      <Title />
+      <a><i class="pi pi-home"></i>&nbsp&nbspHome</a><br/><br/>
+      <a><i class="pi pi-envelope"></i>&nbsp&nbspInbox</a><br/><br/>
+      <a><i class="pi pi-clock"></i>&nbsp&nbspHistory</a><br/><br/><br/><br/>
+      <Button class="btn" label="Create Message"/>
     </div>
   	<div className="p-col-9">
-      <h2>Login</h2>
     </div>
   </div>
 </template>
 
 <style scoped>
-.sidebar {
+  .sidebar {
     height: 100vh;
-    background-color: red;
+    width: 20vw;
+    background-color: var(--secondary);
+    padding: 1em;
+    color: var(--cream);
+    font-family: var(--text-font)
   }
 </style>

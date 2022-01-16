@@ -31,6 +31,7 @@ html, body, #app, #view {
 
 h1 {
   font-family: var(--display-font);
+  color: var(--cream);
 }
 
 p {

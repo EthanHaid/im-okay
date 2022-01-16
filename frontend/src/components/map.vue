@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
-import { db } from "@/firebase";
+import { db } from "@/services/firebase";
 import { PointsApi } from "@/api/points";
 
 declare const harp: any;

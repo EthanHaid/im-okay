@@ -1,14 +1,30 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import {onMounted, ref} from "vue";
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
+import Dropdown from 'primevue/dropdown';
 
 import Title from "@/components/title.vue";
 import {axios} from "@/services/axios";
+import {DisasterAPI} from "@/api/disaster";
+import {useRouter} from "vue-router";
 
+const router = useRouter()
 const numbers = ref<String[]>([])
+const disasters = ref<String[]>([])
 const number = ref("")
 const sent = ref(false);
+const selectedDisaster = ref(null);
+
+// Load disasters for autocomplete
+onMounted(async () => {
+  let disasterApi = new DisasterAPI(null, null)
+
+  // Parse data for better viewing
+  let axiosData = (await disasterApi.getDisasters()).data;
+  disasters.value = axiosData;
+  console.log(axiosData)
+})
 
 const keyDownEvent = (event: KeyboardEvent) => {
   if (event.key === "Enter") {
@@ -18,9 +34,15 @@ const keyDownEvent = (event: KeyboardEvent) => {
   }
 };
 
+async function newDisaster() {
+  await router.push('/create')
+}
+
 async function submitNumbers(disasterId: string) {
+  if(!selectedDisaster.value || !selectedDisaster.value.id) { return; }
+
   sent.value = true;
-  await axios.post(`/message/send/list?disaster_id=${disasterId}`, numbers.value)
+  await axios.post(`/message/send/list?disaster_id=${selectedDisaster.value.id}`, numbers.value)
 }
 
 function uploadCSV(event: any) {
@@ -45,13 +67,19 @@ function uploadCSV(event: any) {
   <div class="center">
     <div class="title">Send a safety message</div>
     <div class="subtitle">recipients will receive a text asking if they're okay, and if they need location-based emergency services</div>
+
+
     <div v-if="!sent" class="list-container">
+      <div>
+        <Button class="new-disaster" @click="newDisaster" label="Input a new Disaster" />
+      </div>
       <div class="list-item" v-for="number in numbers">
         {{number}}
       </div>
-      <InputText type="number" placeholder="Enter a phone number" v-model="number" @keydown="keyDownEvent" />
+      <Dropdown v-model="selectedDisaster" :options="disasters" optionLabel="message" placeholder="Select a Disaster" />
+      <InputText :disabled="selectedDisaster === null" type="number" placeholder="Enter a phone number" v-model="number" @keydown="keyDownEvent" />
       <br/> or
-      <input type='file' @change='uploadCSV($event)' id='fileInput'>
+      <input :disabled="selectedDisaster === null" type='file' @change='uploadCSV($event)' id='fileInput'>
     </div>
     <div v-else class="list-container">
       Message sent!
@@ -93,6 +121,10 @@ header > h1 {
 
 .list-item {
   padding: 0.5rem;
+}
+
+.new-disaster {
+  margin-bottom: 1rem;
 }
 
 /* Chrome, Safari, Edge, Opera */

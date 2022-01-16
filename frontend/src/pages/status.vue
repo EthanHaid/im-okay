@@ -39,9 +39,9 @@ function setLocation() {
     <header>
       <Title />
     </header>
-  <div>
+  <div class="container">
     <p>We detected that you are near:</p>
-    <div class="for-adam">
+    <div class="light">
       <h3>3345 Pearl St. New York, NY, United States</h3>
     </div>
     <p>where there is currently a <strong>hurricane warning</strong></p>
@@ -53,13 +53,22 @@ function setLocation() {
 </template>
 
 <style scoped>
-.for-adam {
-  background-image: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);
+.light {
+  background-color: var(--primary-light);
+  padding: 2em;
 }
 
-div {
-  text-align: center;
+.container {
   padding: 2em;
+  text-align: center;
+  max-width: 50em;
+  width: 100%;
+  background-color: var(--cream);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 header {

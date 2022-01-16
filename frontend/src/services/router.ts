@@ -6,7 +6,7 @@ import Map from "@/pages/map.vue";
 import Portal from "@/pages/portal.vue";
 import Status from "@/pages/status.vue";
 import Request from "@/pages/request.vue";
-import DisasterHistory from "@/pages/disasterHistory.vue";
+import Create from "@/pages/create.vue";
 
 const routes = [
   {
@@ -40,9 +40,9 @@ const routes = [
     component: Request,
   },
   {
-    path: "/history",
-    name: "History",
-    component: DisasterHistory,
+    path: "/create",
+    name: "Create",
+    component: Create,
   }
 ];
 

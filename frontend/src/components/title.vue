@@ -6,5 +6,7 @@
 </template>
 
 <style scoped>
-  
+  h1 {
+    cursor: pointer;
+  }
 </style>

@@ -8,6 +8,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000",
         "https://imokay.tech"
+        "https://www.imokay.tech"
     ],
     allow_credentials=True,
     allow_methods=["*"],

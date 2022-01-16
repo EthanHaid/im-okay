@@ -6,6 +6,8 @@ import Map from "@/pages/map.vue";
 import Portal from "@/pages/portal.vue";
 import Status from "@/pages/status.vue";
 import Request from "@/pages/request.vue";
+import Send from "@/pages/send.vue";
+import DisasterHistory from "@/pages/disasterHistory.vue";
 
 const routes = [
   {
@@ -37,6 +39,16 @@ const routes = [
     path: "/request",
     name: "Request",
     component: Request,
+  },
+  {
+    path: "/send",
+    name: "Send",
+    component: Send,
+  },
+  {
+    path: "/history",
+    name: "History",
+    component: DisasterHistory,
   }
 ];
 

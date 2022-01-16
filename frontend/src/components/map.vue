@@ -61,7 +61,7 @@ onMounted(() => {
       if (staticPoint != null) {
         console.log(staticPoint)
         // @ts-ignore
-        clickedPoint = features.features[staticPoint.dataSourceOrder]
+        clickedPoint = features.features[staticPoint.userData]
         pointData.value.selected = true;
         pointData.value.coordinates = clickedPoint.geometry.coordinates;
         pointData.value.properties = clickedPoint.properties;
@@ -96,9 +96,9 @@ onMounted(() => {
     </div>
 
     <div class="li">
-      Status: 
+      Is Ok:
       <span v-if="pointData.properties.isOk">
-        Ok
+        {{ pointData.properties.isOk }}
       </span>
       <span v-else>Not Ok</span>
     </div>

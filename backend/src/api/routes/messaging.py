@@ -22,14 +22,6 @@ async def send_disaster_message_csv(disaster_id: str, file: UploadFile = File(..
     return [message.sid for message in messages]
 
 
-@router.post("/send/list")
-async def send_disaster_message_list(phone_numbers: List[str], disaster_id: str) -> str:
-    twilio_client = TwilioClient(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN, config.TWILIO_PHONE_NUMBER)
-
-    message = twilio_client.send_bulk_disaster_messages(phone_numbers, disaster_id)
-    return message.sid
-
-
 @router.post("/send")
 def send_disaster_message(phone_number: str, disaster_id: str) -> str:
     twilio_client = TwilioClient(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN, config.TWILIO_PHONE_NUMBER)
@@ -53,4 +45,3 @@ def send_message_reply() -> str:
     resp = MessagingResponse()
     message = resp.message("Hi again! Please use the previously sent URL to proceed 🙏")
     return message.sid
-

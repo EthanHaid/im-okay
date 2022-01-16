@@ -71,14 +71,14 @@ function uploadCSV(event: any) {
 
     <div v-if="!sent" class="list-container">
       <div>
-        <Button class="new-disaster" @click="newDisaster" label="Input a new Disaster" />
+        <Button class="new-disaster btn" @click="newDisaster" label="Input a new Disaster" />
       </div>
       <div class="list-item" v-for="number in numbers">
         {{number}}
       </div>
       <Dropdown v-model="selectedDisaster" :options="disasters" optionLabel="message" placeholder="Select a Disaster" />
       <InputText :disabled="selectedDisaster === null" type="number" placeholder="Enter a phone number" v-model="number" @keydown="keyDownEvent" />
-      <br/> or
+      <br/><br/> or <br/><br/>
       <input :disabled="selectedDisaster === null" type='file' @change='uploadCSV($event)' id='fileInput'>
     </div>
     <div v-else class="list-container">

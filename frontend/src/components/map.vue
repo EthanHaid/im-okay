@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, reactive, onMounted } from 'vue';
 import { db } from "@/services/firebase";
 import { PointsApi } from "@/api/points";
 
@@ -8,6 +8,17 @@ declare const harp: any;
 const canvasRef = ref();
 let features: any[] = [];
 let clickedPoint: any = [];
+
+const pointData = ref({
+  selected: false,
+  coordinates: null,
+  properties: {
+    phoneNumber: null,
+    isOk: true,
+    message: null,
+    timestamp: null
+  }
+})
 
 onMounted(() => {
   const canvas = canvasRef.value;
@@ -48,6 +59,10 @@ onMounted(() => {
       if (intersectResult.length) {
         // @ts-ignore
         clickedPoint = features.features[intersectResult[0].dataSourceOrder]
+        pointData.value.selected = true;
+        pointData.value.coordinates = clickedPoint.geometry.coordinates;
+        pointData.value.properties = clickedPoint.properties;
+        console.log(pointData.value);
       }
   });
 
@@ -70,7 +85,57 @@ onMounted(() => {
 
 <template>
   <canvas ref="canvasRef" />
+
+  <div class="overlay" v-if="pointData.selected">
+    <div class="title">Disaster Check-in</div>
+
+    <div class="li" v-if="pointData.properties.phoneNumber">
+      Phone Number: {{pointData.properties.phoneNumber}}
+    </div>
+
+    <div class="li">
+      Status: 
+      <span v-if="pointData.properties.isOk">
+        Ok
+      </span>
+      <span v-else>Not Ok</span>
+    </div>
+
+    <div class="li" v-if="pointData.properties.timestamp">
+      Time: {{pointData.properties.timestamp}}
+    </div>
+
+    <div class="li" v-if="pointData.properties.message">
+      Message: {{pointData.properties.message}}
+    </div>
+
+    <div class="li" v-if="pointData.coordinates">
+      Location: 
+      Lat: {{pointData.coordinates[0]}}
+      Lon: {{pointData.coordinates[1]}}
+    </div>
+  </div>
 </template>
 
 <style scoped>
+.overlay {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 1.25rem;
+  border-top-right-radius: 0.25rem;
+  font-weight: 700;
+  background-color: lightblue;
+}
+
+.title {
+  font-size: 1.25rem;
+  text-decoration: underline;
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+
+.li {
+  padding: 0.2rem;
+}
 </style>

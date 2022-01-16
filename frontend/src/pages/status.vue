@@ -13,7 +13,7 @@ import { DisasterAPI } from "@/api/disaster";
 
 const route = useRoute()
 var value = ""
-let location = {}
+let location = ref({})
 let disasterApi = new DisasterAPI(route.query.disaster_id, route.query.disaster_response_id)
 setLocation()
 
@@ -29,6 +29,7 @@ async function thanks() {
 
 function setLocation() {
   navigator.geolocation.getCurrentPosition(pos => {
+      location.value = `Latitude: ${pos.coords.latitude}, Longitude: ${pos.coords.latitude}`
       disasterApi.updateLocation(pos)
   });
 }
@@ -42,7 +43,7 @@ function setLocation() {
   <div class="container">
     <p>We detected that you are near:</p>
     <div class="light">
-      <h3>3345 Pearl St. New York, NY, United States</h3>
+      <h3>{{ location }}</h3>
     </div>
     <p>where there is currently a <strong>hurricane warning</strong></p>
     <h3>Are you okay?</h3>

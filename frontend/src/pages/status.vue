@@ -12,6 +12,7 @@ import { DisasterAPI } from "@/api/disaster";
 
 
 const route = useRoute()
+var value = ""
 let location = {}
 let disasterApi = new DisasterAPI(String(route.query.d), String(route.query.p))
 setLocation()
@@ -47,7 +48,6 @@ function setLocation() {
     <h3>Are you okay?</h3>
     <span class="p-float-label">
     	<InputText id="comment" type="text" v-model="value" placeholder="Optional message"/>
-    	<label for="comment"></label>
     </span><br/>
     <Button class="btn" label="SEND HELP" @click="help()"/><br/>
     <Button class="ok-btn" label="I'm Okay" @click="thanks()"/>

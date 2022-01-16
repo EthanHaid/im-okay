@@ -7,7 +7,7 @@ import VVanta from 'vue-vanta';
 const options = {
   mouseControls: true,
   touchControls: true,
-  minHeight: 1000.00,
+  minHeight: 1440.00,
   minWidth: 200.00,
   scale: 1.00,
   scaleMobile: 1.00,
@@ -38,10 +38,10 @@ const options = {
 <style scoped>
 .absolute {
     position: absolute;
-    left: 15vw;
-    top: 30vh;
+    left: 5%;
+    top: 20%;
     font-size: 2em;
-    width: 40vw;
+    min-width: 40vw;
     background-color: var(--secondary);
     padding: 1em;
 }

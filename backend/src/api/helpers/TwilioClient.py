@@ -41,7 +41,10 @@ class TwilioClient:
         disaster_response_id = handle_create_disaster_response(disaster_id, disaster_response_input)['name']
 
         # Send text message
-        message_body = f"{DISASTER_MSG}\nWe Heard there was a {message} near {location_str}!\n{config.FRONTEND_URL}/status?disaster_id={disaster_id}&disaster_response_id={disaster_response_id} "
+        message_body = f"{DISASTER_MSG}\nWe Heard there was a {message} near {location_str}! Click the following link to let us know you're ok!\n" \
+                       f"\n{config.FRONTEND_URL}/status?disaster_id={disaster_id}&disaster_response_id={disaster_response_id} "
+        print(message_body)
+
         return self.send_message(phone_number, message_body)
 
     def send_message(self, phone_number: str, message_body: str):

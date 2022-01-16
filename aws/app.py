@@ -32,17 +32,17 @@ class FastApiService(Construct):
             description="A Simple Disaster Recovery API",
             proxy=True,
             default_cors_preflight_options=aws_apigateway.CorsOptions(
-                allow_origins=aws_apigateway.Cors.ALL_ORIGINS,
-                allow_methods=aws_apigateway.Cors.ALL_METHODS
+                allow_methods=['GET', 'POST', 'PUT', 'OPTIONS'],
+                allow_origins=aws_apigateway.Cors.ALL_ORIGINS
             )
         )
-
 
 
 class BackendStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
         FastApiService(self, "FastAPI")
+
 
 app = App()
 BackendStack(app, "DisasterStack", env=Environment(account="591968328369", region="us-east-1"))

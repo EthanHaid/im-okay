@@ -12,7 +12,8 @@ const visibleRight = ref(false);
   <template>
     <header>
       <h1 @click="$router.push('/')">
-        Disaster<span class="highlight">+</span>Response
+        I<span class="highlight">'</span>m
+        Okay<span class="highlight">.</span>
       </h1>
     </header>
     <Map />

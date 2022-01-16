@@ -2,7 +2,6 @@
 import { ref, reactive, onMounted } from 'vue';
 import { db } from "@/services/firebase";
 import { PointsApi } from "@/api/points";
-import { NotEqualStencilFunc } from 'three';
 
 declare const harp: any;
 

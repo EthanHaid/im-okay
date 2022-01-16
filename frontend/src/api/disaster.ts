@@ -6,9 +6,15 @@ class DisasterAPI {
     lat: number | null = null
     lon: number | null = null
 
-    constructor(disasterId: string | null, disaster_response_id: string | null) {
-        this.disasterId = disasterId!
-        this.disaster_response_id = disaster_response_id!
+    constructor(disasterId: any, disaster_response_id: any) {
+        this.disasterId = disasterId == null ? "default" : String(disasterId);
+
+        if (disaster_response_id == null) {
+            this.disaster_response_id = "default"
+            this._create_disaster_response(this.disasterId).then(id => this.disaster_response_id = id)
+        } else {
+            this.disaster_response_id = String(disaster_response_id)
+        }
     }
 
     updateLocation(pos: GeolocationPosition) {
@@ -17,16 +23,16 @@ class DisasterAPI {
     }
 
     async respondOk() {
-        return this._respondToDisaster()
+        return this._respondToDisaster("True")
     }
 
     async respondHelp() {
-        return this._respondToDisaster()
+        return this._respondToDisaster("False")
     }
 
-    async _respondToDisaster() {
+    async _respondToDisaster(isOk: string) {
         return await axios.put(`/disasters/response/${this.disasterId}/${this.disaster_response_id}`, {
-            "is_ok": String(false),
+            "is_ok": isOk,
             "message": "stub",
             "location": {
                 lat: this.lat,
@@ -35,6 +41,16 @@ class DisasterAPI {
             "disaster_response_id": this.disaster_response_id,
             "phone_number": "test"
         })
+    }
+
+    async _create_disaster_response(id: string) {
+        const data = (await axios.post(`/disasters/response/${id}`, {
+            is_ok: "No Response",
+            message: "",
+            phone_number: "unknown"
+        })).data
+
+        return data.name
     }
 
     async getDisasters() {

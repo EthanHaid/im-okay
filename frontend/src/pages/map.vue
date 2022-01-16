@@ -10,7 +10,11 @@ const visibleRight = ref(false);
 </script>
 
   <template>
-    <Button @click="$router.push('/')" label="Home" />
+    <header>
+      <h1 @click="$router.push('/')">
+        Disaster<span class="highlight">+</span>Response
+      </h1>
+    </header>
     <Map />
 
     <Sidebar v-model:visible="visibleRight" position="right">
@@ -20,12 +24,23 @@ const visibleRight = ref(false);
     <Button
       id="filter-button"
       icon="pi pi-filter-fill"
-      className="p-button-rounded"
+      class="p-button-rounded"
       @click="visibleRight= true" />
 
 </template>
 
 <style scoped>
+header {
+    background-color: rgba(53, 84, 151, 0.75);
+    position: fixed;
+    top: 0;
+    width: 100vw;
+}
+header > h1 {
+  color: var(--cream);
+  margin: 0.2em 0.5em;
+}
+
 #filter-button {
   position: fixed;
   bottom: 2em;

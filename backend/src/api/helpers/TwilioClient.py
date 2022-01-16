@@ -2,7 +2,8 @@ from twilio.rest import Client
 from typing import List
 
 from api import config
-
+from ..routes.disaster import handle_create_disaster_response
+from ..models import DisasterResponseInput, IsOkResponse
 
 DISASTER_MSG = f"""
 Hey my broski, you good? 👀
@@ -22,7 +23,15 @@ class TwilioClient:
             messages.append(self.send_disaster_message(phone_number, disaster_id))
 
     def send_disaster_message(self, phone_number: str, disaster_id: str):
-        message_body = f"{DISASTER_MSG}\n{config.FRONTEND_URL}?d={disaster_id}&p={phone_number}"
+        # Create an unanswered Disaster Response Input
+        disaster_response_input = DisasterResponseInput(
+            is_ok=IsOkResponse.NO_RESPONSE,
+            phone_number=phone_number,
+        )
+        disaster_response_id = handle_create_disaster_response(disaster_id, disaster_response_input)['name']
+
+        # Send text message
+        message_body = f"{DISASTER_MSG}\n{config.FRONTEND_URL}?disaster_id={disaster_id}&disaster_response_id={disaster_response_id} "
         return self.send_message(phone_number, message_body)
 
     def send_message(self, phone_number: str, message_body: str):

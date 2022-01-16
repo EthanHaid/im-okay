@@ -10,6 +10,7 @@
     "@here/harp-map-controls": "^0.27.1",
     "@here/harp-mapview": "^0.27.1",
     "@here/harp-vectortile-datasource": "^0.27.1",
+    "axios": "^0.24.0",
     "firebase": "^9.6.3",
     "primeflex": "^3.1.2",
     "primeicons": "^5.0.0",

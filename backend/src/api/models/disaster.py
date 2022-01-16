@@ -6,14 +6,17 @@ from .disaster_response import DisasterResponseFireBase
 
 class DisasterBase(BaseModel):
     message: str
-    location: str
-    responses: List[DisasterResponseFireBase] = []
+    location_string: str
 
 
 class DisasterInput(DisasterBase):
     pass
 
 
+class DisasterCreate(DisasterInput):
+    timestamp: str
+
+
 class DisasterFireBase(DisasterBase):
     id: str
-    timestamp: datetime.datetime
+    responses: List[DisasterResponseFireBase] = []

@@ -42,7 +42,7 @@ def create_disaster_response(disaster_id: str, disaster_response_input: Disaster
 
 
 def handle_create_disaster_response(disaster_id: str, disaster_response_input: DisasterResponseInput):
-    disaster_response = DisasterCreate(**disaster_response_input.dict(), timestamp=datetime.datetime.now())
+    disaster_response = DisasterResponseInput(**disaster_response_input.dict(), timestamp=datetime.datetime.now())
 
     firebase_client = FirebaseClient()
     db = firebase_client.get_db()

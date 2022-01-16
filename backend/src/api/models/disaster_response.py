@@ -7,8 +7,8 @@ from .location import Location
 
 class DisasterResponseBase(BaseModel):
     is_ok: IsOkResponse
-    message: str
-    location: Location
+    message: str = None
+    location: Location = None
     phone_number: str
 
 

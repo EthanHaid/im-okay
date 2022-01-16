@@ -6,7 +6,6 @@ import Map from "@/pages/map.vue";
 import Portal from "@/pages/portal.vue";
 import Status from "@/pages/status.vue";
 import Request from "@/pages/request.vue";
-import DisasterHistory from "@/pages/disasterHistory.vue";
 
 const routes = [
   {

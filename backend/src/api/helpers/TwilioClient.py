@@ -1,6 +1,15 @@
 from twilio.rest import Client
 from typing import List
 
+from api import config
+
+
+DISASTER_MSG = f"""
+Hey my broski, you good? 👀
+
+Reply YES or NO
+"""
+
 
 class TwilioClient:
     def __init__(self, account_sid: str, auth_token: str, twilio_phone_number: str):
@@ -13,7 +22,7 @@ class TwilioClient:
             messages.append(self.send_disaster_message(phone_number, disaster_id))
 
     def send_disaster_message(self, phone_number: str, disaster_id: str):
-        message_body = "Hey my broski, you good? Reply YES or NO."
+        message_body = f"{DISASTER_MSG}\n{config.FRONTEND_URL}?d={disaster_id}&p={phone_number}"
         return self.send_message(phone_number, message_body)
 
     def send_message(self, phone_number: str, message_body: str):

@@ -37,10 +37,7 @@ def get_disasters() -> List[DisasterFireBase]:
 
 @router.get("/{disaster_id}")
 def get_disaster(disaster_id: str) -> DisasterFireBase:
-    firebase_client = FirebaseClient()
-    db = firebase_client.get_db()
-    disaster = db.child(PREFIX).child(disaster_id).get()
-    return disaster
+    return _get_disaster(disaster_id)
 
 
 @router.post("/")
@@ -83,4 +80,11 @@ def handle_create_disaster_response(disaster_id: str, disaster_response_input: D
     firebase_client = FirebaseClient()
     db = firebase_client.get_db()
     disaster = db.child(PREFIX).child(disaster_id).child('responses').push(disaster_response.dict())
+    return disaster
+
+
+def _get_disaster(disaster_id: str) -> DisasterFireBase:
+    firebase_client = FirebaseClient()
+    db = firebase_client.get_db()
+    disaster = db.child(PREFIX).child(disaster_id).get()
     return disaster

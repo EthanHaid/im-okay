@@ -14,7 +14,7 @@ const numbers = ref<String[]>([])
 const disasters = ref<String[]>([])
 const number = ref("")
 const sent = ref(false);
-const selectedDisaster = ref(null);
+const selectedDisaster = ref();
 
 // Load disasters for autocomplete
 onMounted(async () => {
@@ -38,7 +38,7 @@ async function newDisaster() {
   await router.push('/create')
 }
 
-async function submitNumbers(disasterId: string) {
+async function submitNumbers() {
   if(!selectedDisaster.value || !selectedDisaster.value.id) { return; }
 
   sent.value = true;
@@ -70,23 +70,25 @@ function uploadCSV(event: any) {
 
 
     <div v-if="!sent" class="list-container">
-      <div>
-        <Button class="new-disaster btn" @click="newDisaster" label="Input a new Disaster" />
-      </div>
       <div class="list-item" v-for="number in numbers">
         {{number}}
       </div>
-      <Dropdown v-model="selectedDisaster" :options="disasters" optionLabel="message" placeholder="Select a Disaster" />
       <InputText :disabled="selectedDisaster === null" type="number" placeholder="Enter a phone number" v-model="number" @keydown="keyDownEvent" />
-      <br/><br/> or <br/><br/>
+      <br/>or
       <input :disabled="selectedDisaster === null" type='file' @change='uploadCSV($event)' id='fileInput'>
+
+      <div class="disaster-select">
+        <Dropdown v-model="selectedDisaster" :options="disasters" optionLabel="message" placeholder="Choose a Disaster" />
+        or
+        <Button class="new-disaster btn" @click="newDisaster" label="Input a new Disaster" />
+      </div>
     </div>
     <div v-else class="list-container">
       Message sent!
       &nbsp;
       <Button @click="sent = false" label="Send another"></Button>
     </div>
-    <Button v-if="numbers.length > 0" class="submit-button" @click="submitNumbers('-MtW3zaUorRXshWPTJN3')" label="Send Safety Message" />
+    <Button v-if="numbers.length > 0" class="submit-button btn" @click="submitNumbers" label="Send Safety Message" />
   </div>
 </template>
 
@@ -123,8 +125,12 @@ header > h1 {
   padding: 0.5rem;
 }
 
+
+.disaster-select {
+  margin: 1rem;
+}
 .new-disaster {
-  margin-bottom: 1rem;
+  
 }
 
 /* Chrome, Safari, Edge, Opera */

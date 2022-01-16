@@ -19,7 +19,7 @@ async function submitDisaster() {
   }
 
   try {
-    await axios.post(`/disasters/`, JSON.stringify(disaster));
+    await axios.post(`/disasters/`, disaster);
     await router.push('/request');
   } catch(e: any) {
     alert("Oops... Request failed." + e.message);

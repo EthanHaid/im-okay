@@ -14,7 +14,7 @@ import { DisasterAPI } from "@/api/disaster";
 const route = useRoute()
 var value = ""
 let location = {}
-let disasterApi = new DisasterAPI(String(route.query.d), String(route.query.p))
+let disasterApi = new DisasterAPI(String(route.query.disaster_id), String(route.query.disaster_response_id))
 setLocation()
 
 async function help() {

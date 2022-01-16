@@ -2,13 +2,13 @@ import {axios} from "@/axios";
 
 class DisasterAPI {
     disasterId: string
-    phoneNumber: string
+    disaster_response_id: string
     lat: number | null = null
     lon: number | null = null
 
-    constructor(disasterId: string | null, phoneNumber: string | null) {
+    constructor(disasterId: string | null, disaster_response_id: string | null) {
         this.disasterId = disasterId!
-        this.phoneNumber = phoneNumber!
+        this.disaster_response_id = disaster_response_id!
 
     }
 
@@ -26,14 +26,15 @@ class DisasterAPI {
     }
 
     async _respondToDisaster() {
-        return await axios.post(`/disasters/response/${1}`, {
-            "is_ok": false,
+        return await axios.put(`/disasters/response/${this.disasterId}/${this.disaster_response_id}`, {
+            "is_ok": String(false),
             "message": "stub",
             "location": {
                 lat: this.lat,
                 lon: this.lon
             },
-            "phone_number": this.phoneNumber
+            "disaster_response_id": this.disaster_response_id,
+            "phone_number": "test"
         })
     }
 }

@@ -39,6 +39,7 @@ const options = {
 .absolute {
     position: absolute;
     left: 5%;
+    margin-right: 5%;
     top: 20%;
     font-size: 2em;
     min-width: 40vw;

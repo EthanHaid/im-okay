@@ -15,7 +15,7 @@ onMounted(() => {
     canvas,
     theme: {
       extends:
-          'https://unpkg.com/@here/harp-map-theme/resources/berlin_tilezen_effects_streets.json',
+          'https://unpkg.com/@here/harp-map-theme/resources/berlin_tilezen_day_reduced.json',
       styles: {
         geojson: [
           {

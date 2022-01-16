@@ -1,19 +1,28 @@
-/* 
+/*
     Overrides colors from the bootstrap4-light-blue theme.
-    
+
     TODO: Replace "border" tags with "border-color":
         so only colour data is overwritten.
         Same is not possible with box-shadow unfortunately.
  */
 
 :root {
+    --primary: #ff6458;
+    --primary-light: #ffd1ba;
+    --secondary: #355497;
+    --secondary-light: #6987c9;
+    --cream: #fdf6ed;
+    --text-color: #1a150f;
+    --display-font: "Cabin", sans-serif;
+    --text-font: "Raleway", sans-serif;
+
     --primary-color: rgb(128, 0, 0);
     --secondary-color: rgb(180, 50, 50);
-  
+
     --light: rgb(240, 240, 240);
     --medium: rgb(117, 117, 122);
     --dark: #2A2B2E;
-    
+
     --highlight-color: rgba(255, 0, 0, 0.5);
     --highlight-color-2: #6c757d;
     --highlight-color-3: #ced4da;

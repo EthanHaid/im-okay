@@ -9,6 +9,7 @@ import {axios} from "@/services/axios";
 import {DisasterAPI} from "@/api/disaster";
 import {useRouter} from "vue-router";
 
+const inputTextPlaceholder = ref("Enter a phone number");
 const router = useRouter()
 const numbers = ref<String[]>([])
 const disasters = ref<String[]>([])
@@ -31,6 +32,7 @@ const keyDownEvent = (event: KeyboardEvent) => {
     event.preventDefault();
     numbers.value.push(number.value);
     number.value = "";
+    inputTextPlaceholder.value = "Enter another number..."
   }
 };
 
@@ -43,6 +45,7 @@ async function submitNumbers() {
 
   sent.value = true;
   await axios.post(`/message/send/list?disaster_id=${selectedDisaster.value.id}`, numbers.value)
+  numbers.value = [];
 }
 
 function uploadCSV(event: any) {
@@ -66,29 +69,31 @@ function uploadCSV(event: any) {
   </header>
   <div class="center">
     <div class="title">Send a safety message</div>
-    <div class="subtitle">recipients will receive a text asking if they're okay, and if they need location-based emergency services</div>
+    <div class="subtitle">Recipients will receive a text asking if they're okay and if they need location-based emergency services</div>
 
 
     <div v-if="!sent" class="list-container">
       <div class="list-item" v-for="number in numbers">
         {{number}}
       </div>
-      <InputText :disabled="selectedDisaster === null" type="number" placeholder="Enter a phone number" v-model="number" @keydown="keyDownEvent" />
-      <br/>or
-      <input :disabled="selectedDisaster === null" type='file' @change='uploadCSV($event)' id='fileInput'>
+      <InputText :disabled="selectedDisaster === null" type="number" :placeholder="inputTextPlaceholder" v-model="number" @keydown="keyDownEvent" />
+      <div v-if="numbers.length == 0">
+        <br/>or<br/>
+        <input :disabled="selectedDisaster === null" type='file' @change='uploadCSV($event)' id='fileInput'>
+      </div>
 
-      <div class="disaster-select">
+      <div class="disaster-select" v-if="numbers.length > 0">
         <Dropdown v-model="selectedDisaster" :options="disasters" optionLabel="message" placeholder="Choose a Disaster" />
         or
-        <Button class="new-disaster btn" @click="newDisaster" label="Input a new Disaster" />
+        <Button class="new-disaster" @click="newDisaster" label="Input a new Disaster" />
       </div>
+      <Button v-if="numbers.length > 0 && selectedDisaster != null" class="submit-button btn" @click="submitNumbers" label="Send Safety Message" />
     </div>
     <div v-else class="list-container">
       Message sent!
       &nbsp;
-      <Button @click="sent = false" label="Send another"></Button>
+      <Button class="btn" @click="sent = false" label="Send another"></Button>
     </div>
-    <Button v-if="numbers.length > 0" class="submit-button btn" @click="submitNumbers" label="Send Safety Message" />
   </div>
 </template>
 
@@ -108,6 +113,7 @@ header > h1 {
 }
 .title {
   font-size: 1.5rem;
+  font-weight: 700;
   margin: 1rem;
 }
 
@@ -127,10 +133,10 @@ header > h1 {
 
 
 .disaster-select {
-  margin: 1rem;
+  margin: 2rem;
 }
 .new-disaster {
-  
+  background-color: var(--secondary-light);
 }
 
 /* Chrome, Safari, Edge, Opera */

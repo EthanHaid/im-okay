@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import Title from "@/components/title.vue";
 
-import { onMounted } from 'vue';
 import Button from "primevue/button";
 import VVanta from 'vue-vanta';
 

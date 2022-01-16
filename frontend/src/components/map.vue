@@ -10,7 +10,8 @@ onMounted(() => {
   const canvas = canvasRef.value;
   const mapView = new harp.MapView({
     canvas,
-    theme: "https://unpkg.com/@here/harp-map-theme@latest/resources/berlin_tilezen_night_reduced.json"
+    theme: "https://unpkg.com/@here/harp-map-theme@latest/resources/berlin_tilezen_night_reduced.json",
+    projection: harp.sphereProjection
   });
 
   const mapControls = new harp.MapControls(mapView);

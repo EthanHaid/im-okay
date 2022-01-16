@@ -7,7 +7,7 @@ from .disaster_response import DisasterResponseFireBase
 class DisasterBase(BaseModel):
     message: str
     location: str
-    responses: List[DisasterResponseFireBase]
+    responses: List[DisasterResponseFireBase] = []
 
 
 class DisasterInput(DisasterBase):

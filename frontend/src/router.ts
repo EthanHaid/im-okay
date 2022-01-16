@@ -4,6 +4,8 @@ import NotFound from "@/pages/notFound.vue";
 import Home from "@/pages/home.vue";
 import Map from "@/pages/map.vue";
 import Portal from "@/pages/portal.vue";
+import Status from "@/pages/status.vue";
+import Send from "@/pages/send.vue";
 
 const routes = [
   {
@@ -25,6 +27,16 @@ const routes = [
     path: "/portal",
     name: "Portal",
     component: Portal,
+  },
+  {
+    path: "/status",
+    name: "Status",
+    component: Status,
+  },
+  {
+    path: "/send",
+    name: "Send",
+    component: Send,
   }
 ];
 

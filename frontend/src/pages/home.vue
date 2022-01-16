@@ -5,6 +5,8 @@ import Button from "primevue/button";
 <template>
   <h1>Home</h1>
   <Button @click="$router.push('map')" label="View Map" />
+  <br />
+  <Button @click="$router.push('send')" label="Send safety check" />
 </template>
 
 <style scoped>

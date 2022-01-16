@@ -9,7 +9,6 @@ class DisasterAPI {
     constructor(disasterId: string | null, disaster_response_id: string | null) {
         this.disasterId = disasterId!
         this.disaster_response_id = disaster_response_id!
-
     }
 
     updateLocation(pos: GeolocationPosition) {
@@ -36,6 +35,10 @@ class DisasterAPI {
             "disaster_response_id": this.disaster_response_id,
             "phone_number": "test"
         })
+    }
+
+    async getDisasters() {
+        return await axios.get('/disasters/');
     }
 }
 

@@ -17,6 +17,6 @@ class DisasterCreate(DisasterInput):
     timestamp: str
 
 
-class DisasterFireBase(DisasterBase):
+class DisasterFireBase(DisasterCreate):
     id: str
     responses: List[DisasterResponseFireBase] = []

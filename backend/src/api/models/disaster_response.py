@@ -20,5 +20,5 @@ class DisasterResponseCreate(DisasterResponseInput):
     timestamp: str
 
 
-class DisasterResponseFireBase(DisasterResponseInput):
+class DisasterResponseFireBase(DisasterResponseCreate):
     id: str

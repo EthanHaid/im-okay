@@ -31,7 +31,7 @@ class TwilioClient:
         handle_create_disaster_response(disaster_id, disaster_response_input)
 
         # Send text message
-        message_body = f"{DISASTER_MSG}\n{config.FRONTEND_URL}?d={disaster_id}&p={phone_number}"
+        message_body = f"{DISASTER_MSG}\n{config.FRONTEND_URL}/status?d={disaster_id}&p={phone_number}"
         return self.send_message(phone_number, message_body)
 
     def send_message(self, phone_number: str, message_body: str):

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import {onMounted, ref} from 'vue';
 import Map from "@/components/map.vue"
 import Title from "@/components/title.vue"
 
@@ -7,13 +7,31 @@ import Button from "primevue/button";
 import Checkbox from 'primevue/checkbox';
 import InputText from 'primevue/inputtext';
 import Sidebar from "primevue/sidebar";
+import { useRoute, onBeforeRouteUpdate } from "vue-router";
+import { DisasterAPI } from "@/api/disaster";
 
-function help() {
+
+const route = useRoute()
+let location = {}
+let disasterApi = new DisasterAPI(String(route.query.d), String(route.query.p))
+setLocation()
+
+async function help() {
+  await disasterApi.respondHelp()
   alert("Help is on the way!")
 }
-function thanks() {
+
+async function thanks() {
+  await disasterApi.respondOk()
   alert("Thanks for confirming!")
 }
+
+function setLocation() {
+  navigator.geolocation.getCurrentPosition(pos => {
+      disasterApi.updateLocation(pos)
+  });
+}
+
 </script>
 
 <template>

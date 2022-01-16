@@ -31,7 +31,7 @@ class PointsApi {
                                 // @ts-ignore
                                 message: value.message,
                                 // @ts-ignore
-                                phoneNumber: value.message,
+                                phoneNumber: value.phoneNumber,
                                 // @ts-ignore
                                 timestamp: value.timestamp
                             },

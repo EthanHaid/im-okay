@@ -64,7 +64,7 @@ def update_disaster_response(disaster_id: str, disaster_response_id: str,
     disaster = disaster_response_record.update({
         'is_ok': disaster_response_input.is_ok,
         'message': disaster_response_input.message,
-        'location:': disaster_response_input.location.dict()
+        'location': disaster_response_input.location.dict()
     })
 
     return disaster

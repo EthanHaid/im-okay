@@ -24,7 +24,7 @@ class FastApiService(Construct):
             timeout=Duration.seconds(30)
         )
 
-        aws_apigateway.LambdaRestApi(
+        api = aws_apigateway.LambdaRestApi(
             self,
             "BackendApiGateWay",
             handler=handler,
@@ -33,7 +33,11 @@ class FastApiService(Construct):
             proxy=True,
             default_cors_preflight_options=aws_apigateway.CorsOptions(
                 allow_methods=['GET', 'POST', 'PUT', 'OPTIONS'],
-                allow_origins=aws_apigateway.Cors.ALL_ORIGINS
+                allow_origins=[
+                    "http://localhost:3000",
+                    "https://imokay.tech",
+                    "https://www.imokay.tech"
+                ]
             )
         )
 
